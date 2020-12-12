@@ -8,11 +8,9 @@
         <script>
             const ROOM_ID = "<%= id %>"
         </script>
-        <script defer src="./peerjs.min.js"></script>
-        <script defer src="./socket.io/socket.io.js"></script>
-        <script defer src="./v4.js"></script>
-        <script defer src="./room.js" defer></script>
-        <script defer src="./grid.js" defer></script>
+        <script src="./peerjs.min.js"></script>
+        <script src="./socket.io/socket.io.js"></script>
+        <script src="./v4.js"></script>
     </head>
     <body>
         <div class="wrap">
@@ -25,5 +23,7 @@
         </div>
         <!-- for mic and video buttons -->
         <div class="bottom"></div>
+        <script src="./room.js"></script>
+        <script src="./grid.js"></script>
     </body>
 </html>
