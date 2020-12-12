@@ -6,7 +6,8 @@ let calls = {}
 
 //production
 const peer = new Peer(undefined, {
-    host: "https://paperpeerserver.herokuapp.com",
+    host: "paperpeerserver.herokuapp.com",
+    secure: true,
     port: 443,
 })
 
