@@ -4,10 +4,17 @@ let socket = io("/")
 // const user_id = v4()
 let calls = {}
 
+//production
 const peer = new Peer(undefined, {
-    host: "/",
-    port: 3001,
+    host: "https://paperpeerserver.herokuapp.com/",
+    port: 443,
 })
+
+//development
+// const peer = new Peer(undefined, {
+//     host: "/",
+//     port: 3001,
+// })
 peer.on("open", (id) => {
     socket.emit("join-room", ROOM_ID, id)
 })
