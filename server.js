@@ -12,9 +12,8 @@ httpServer.listen(process.env.PORT || 3000, () => {
     console.log("listining to port 3000")
 })
 
-//peer server
+//peer server -> put it in server file
 // const { PeerServer } = require("peer")
-
 // const peerserver = PeerServer({
 //     port: 3001,
 //     path: "/",
@@ -25,6 +24,7 @@ httpServer.listen(process.env.PORT || 3000, () => {
 // peerserver.on("disconnect", (client) => {
 //     console.log(`Disconnected ${client.id}`)
 // })
+// 
 
 // const https = require("https")
 // const fs = require("fs")
