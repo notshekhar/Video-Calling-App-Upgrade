@@ -3,15 +3,18 @@ const ejs = require("ejs")
 const socketio = require("socket.io")
 const http = require("http")
 
+require("dotenv").config()
+
 const app = express()
 const httpServer = http.Server(app)
 
-httpServer.listen(3000, () => {
+httpServer.listen(process.env.PORT || 3000, () => {
     console.log("listining to port 3000")
 })
 
 //peer server
 const { PeerServer } = require("peer")
+
 const peerserver = PeerServer({
     port: 3001,
     path: "/",
