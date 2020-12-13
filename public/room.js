@@ -1,5 +1,5 @@
 const PEER_SERVER =
-    config.deploy != "dev" ? "https://paperpeerserver.herokuapp.com" : "/"
+    config.deploy != "dev" ? "paperpeerserver.herokuapp.com" : "/"
 const PEER_PORT = config.deploy != "dev" ? 443 : 3001
 
 function showLoading(message) {

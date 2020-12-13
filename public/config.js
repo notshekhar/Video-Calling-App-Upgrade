@@ -1,3 +1,3 @@
 const config = {
-    deploy: "dev",
+    deploy: "pro",
 }
