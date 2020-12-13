@@ -25,8 +25,8 @@
 .left {
     position: relative;
     /* display: none; */
-    width: calc(100% - 300px);
-    /* width: 100%; */
+    /* width: calc(100% - 300px); */
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -72,7 +72,7 @@
     color: rgb(207, 207, 207);
 }
 .right {
-    display: block;
+    display: none;
     background-color: green;
     width: 300px;
 }
