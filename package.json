@@ -1,21 +1,24 @@
 {
-  "name": "meet_clone",
-  "version": "1.0.0",
-  "main": "server.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
-  },
-  "author": "shekhar tyagi",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "dotenv": "^8.2.0",
-    "ejs": "^3.1.5",
-    "express": "^4.17.1",
-    "http": "0.0.1-security",
-    "https": "^1.0.0",
-    "peer": "^0.5.3",
-    "socket.io": "^2.3.0"
-  }
+    "name": "meet_clone",
+    "version": "1.0.0",
+    "main": "server.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node server.js"
+    },
+    "author": "shekhar tyagi",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "comlink": "^4.3.0",
+        "dotenv": "^8.2.0",
+        "ejs": "^3.1.5",
+        "express": "^4.17.1",
+        "http": "0.0.1-security",
+        "https": "^1.0.0",
+        "peer": "^0.5.3",
+        "prebuild-install": "^6.0.0",
+        "snappy-pure": "^5.6.3",
+        "socket.io": "^2.3.0"
+    }
 }

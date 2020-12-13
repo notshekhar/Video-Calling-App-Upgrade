@@ -1,27 +1,27 @@
-let bottom = document.querySelector(".bottom")
+// let bottom = document.querySelector(".bottom")
 
-window.onmousemove = (e) => {
-    let y = e.clientY
-    let height = window.innerHeight
-    if (y >= height - 200) {
-        bottom.classList.remove("hide_bottom")
-        bottom.classList.add("show_bottom")
-        setTimeout(() => {
-            bottom.classList.add("hide_bottom")
-            bottom.classList.remove("show_bottom")
-        }, 5000)
-    } else {
-        bottom.classList.add("hide_bottom")
-        bottom.classList.remove("show_bottom")
-    }
-}
+// window.onmousemove = (e) => {
+//     let y = e.clientY
+//     let height = window.innerHeight
+//     if (y >= height - 200) {
+//         bottom.classList.remove("hide_bottom")
+//         bottom.classList.add("show_bottom")
+//         setTimeout(() => {
+//             bottom.classList.add("hide_bottom")
+//             bottom.classList.remove("show_bottom")
+//         }, 5000)
+//     } else {
+//         bottom.classList.add("hide_bottom")
+//         bottom.classList.remove("show_bottom")
+//     }
+// }
 
 function recalculateLayout() {
     const gallery = document.querySelector(".gallery")
     const aspectRatio = 16 / 9
-    const screenWidth = document.querySelector(".left").getBoundingClientRect()
+    const screenWidth = document.querySelector(".left_wrap").getBoundingClientRect()
         .width
-    const screenHeight = document.querySelector(".left").getBoundingClientRect()
+    const screenHeight = document.querySelector(".left_wrap").getBoundingClientRect()
         .height
     const videoCount = document.querySelectorAll("video").length
 

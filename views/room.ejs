@@ -5,25 +5,44 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Room Id: <%= id %></title>
         <link rel="stylesheet" href="./room.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+        />
         <script>
             const ROOM_ID = "<%= id %>"
         </script>
         <script src="./peerjs.min.js"></script>
         <script src="./socket.io/socket.io.js"></script>
         <script src="./v4.js"></script>
+        <script src="./config.js"></script>
     </head>
     <body>
         <div class="loading"></div>
         <div class="wrap">
             <!-- for video  -->
             <div class="left">
-                <div class="gallery"></div>
+                <div class="left_wrap">
+                    <div class="gallery"></div>
+                </div>
+                <!-- camera on/off, mute/unmute -->
+                <div class="bottom">
+                    <button class="btn call_cancel">
+                        <i class="fas fa-2x fa-phone-slash"></i>
+                    </button>
+                    <button class="btn toggle_audio">
+                        <!-- <i class="fas fa-2x fa-microphone-alt-slash"></i> -->
+                        <i class="fas fa-2x fa-microphone-alt"></i>
+                    </button>
+                    <button class="btn toggle_camera">
+                        <i class="fas fa-2x fa-video"></i>
+                    </button>
+                </div>
             </div>
             <!-- for chat -->
             <div class="right"></div>
         </div>
         <!-- for mic and video buttons -->
-        <div class="bottom"></div>
         <script src="./room.js"></script>
         <script src="./grid.js"></script>
     </body>

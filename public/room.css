@@ -23,9 +23,17 @@
     display: flex;
 }
 .left {
+    position: relative;
     /* display: none; */
-    /* width: calc(100% - 300px); */
+    width: calc(100% - 300px);
+    /* width: 100%; */
+    display: flex;
+    flex-direction: column;
+}
+.left_wrap {
+    position: relative;
     width: 100%;
+    height: calc(100% - 100px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,33 +45,67 @@
     max-width: calc(var(--width) * var(--cols));
 }
 .video_container {
+    position: relative;
     width: var(--width);
     height: var(--height);
     transition: all 400ms;
-    border-radius: 21px;
+
+    /* border-radius: 21px; */
+    border: solid;
+    border-width: 1px;
+    border-color: rgb(221, 221, 221);
     overflow: hidden;
 }
 .video_container video {
-    height: 100%;
+    position: absolute;
+    height: 80%;
     width: 100%;
+    top: calc(50% - 40%);
     transform: rotateY(180deg);
     transition: all 400ms;
     border-radius: 21px;
 }
+.video_container .video_mute {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: rgb(207, 207, 207);
+}
 .right {
-    display: none;
+    display: block;
     background-color: green;
     width: 300px;
 }
 .bottom {
-    position: fixed;
-    bottom: -300px;
-    left: 0px;
-    width: calc(100% - 300px);
+    position: relative;
     height: 100px;
-    background-color: yellow;
+    border: solid;
+    border-width: 1px 0 0 0;
+    border-color: rgb(221, 221, 221);
+    box-shadow: inset 1px 6px 10px 6px rgb(234 234 234 / 47%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.show_bottom {
+.btn {
+    margin: 0 10px 0 10px;
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    border: solid;
+    border-width: 1px;
+    border-color: rgb(221, 221, 221);
+    outline: none;
+    transition: all 200ms;
+}
+.btn:active {
+    transform: scale(1.1);
+}
+.call_cancel {
+    background-color: red;
+    color: white;
+}
+/* .show_bottom {
     animation: show 500ms forwards;
 }
 @keyframes show {
@@ -84,4 +126,4 @@
     100% {
         bottom: -300px;
     }
-}
+} */
