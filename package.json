@@ -16,6 +16,7 @@
         "express": "^4.17.1",
         "http": "0.0.1-security",
         "https": "^1.0.0",
+        "nedb-promise": "^2.0.1",
         "peer": "^0.5.3",
         "prebuild-install": "^6.0.0",
         "snappy-pure": "^5.6.3",

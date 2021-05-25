@@ -8,10 +8,28 @@ join_room_btn.onclick = () => {
         location.href = `/${room_id}`
     }
 }
+async function generateRoomId() {
+    try {
+        let res = await fetch("/new_room_id")
+        if (res.status == 200) {
+            let { id } = await res.json()
+            return id
+        } else {
+            throw new Error("Error")
+        }
+    } catch (err) {
+        throw new Error(err.message)
+    }
+}
 
-create_room_btn.onclick = function () {
-    let room_id = v4()
-    location.href = room_id
+create_room_btn.onclick = async function () {
+    // let room_id = v4()
+    try {
+        let room_id = await generateRoomId()
+        location.href = room_id
+    } catch (err) {
+        alert(err.message)
+    }
 }
 
 //extra work

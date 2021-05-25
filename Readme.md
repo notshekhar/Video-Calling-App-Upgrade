@@ -7,3 +7,7 @@ Features to Implement
 -   [ ] Auth user before creating and joining the meeting so that can keep track of name and all
 -   [ ] Meeting recording button
 -   [ ] Process Audio and video before sending it to another user in the room using neuralnet (by manupluating every frame on canvas and generating stream out of canvas )
+
+Bugs to fix
+
+-   [ ] Preask for user audo and video

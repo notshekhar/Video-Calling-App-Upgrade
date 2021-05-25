@@ -19,10 +19,12 @@
 function recalculateLayout() {
     const gallery = document.querySelector(".gallery")
     const aspectRatio = 16 / 9
-    const screenWidth = document.querySelector(".left_wrap").getBoundingClientRect()
-        .width
-    const screenHeight = document.querySelector(".left_wrap").getBoundingClientRect()
-        .height
+    const screenWidth = document
+        .querySelector(".left_wrap")
+        .getBoundingClientRect().width
+    const screenHeight = document
+        .querySelector(".left_wrap")
+        .getBoundingClientRect().height
     const videoCount = document.querySelectorAll("video").length
 
     const calculateLayout = (
@@ -78,9 +80,16 @@ function recalculateLayout() {
 
     let vide_cont = document.querySelectorAll(".video_container")
     for (let i = 0; i < vide_cont.length; i++) {
-        if(!vide_cont[i].querySelector("video")){
+        if (!vide_cont[i].querySelector("video")) {
             vide_cont[i].remove()
         }
     }
 }
+
+// function GridLayout() {
+//     let holder = document.querySelector(".left_wrap")
+//     let { width, height } = holder.getBoundingClientRect()
+//     let videoCount = document.querySelectorAll("video").length
+// }
+// GridLayout()
 window.onresize = () => recalculateLayout()

@@ -24,7 +24,7 @@ httpServer.listen(process.env.PORT || 3000, () => {
 // peerserver.on("disconnect", (client) => {
 //     console.log(`Disconnected ${client.id}`)
 // })
-// 
+//
 
 // const https = require("https")
 // const fs = require("fs")
@@ -56,6 +56,11 @@ app.use(express.static("public"))
 
 app.get("/", (req, res) => {
     res.render("index")
+})
+app.get("/new_room_id", (req, res) => {
+    res.json({
+        id: 123,
+    })
 })
 app.get("/:id", (req, res) => {
     let { id } = req.params

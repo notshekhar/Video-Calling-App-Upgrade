@@ -2,6 +2,8 @@ const PEER_SERVER =
     config.deploy != "dev" ? "paperpeerserver.herokuapp.com" : "/"
 const PEER_PORT = config.deploy != "dev" ? 443 : 3001
 
+let [audio, video] = [true, true]
+
 function showLoading(message) {
     let loading = document.querySelector(".loading")
     loading.style.display = "flex"
@@ -42,6 +44,16 @@ function Init() {
         host: PEER_SERVER,
         secure: config.deploy != "dev" ? true : false,
         port: PEER_PORT,
+        config: {
+            iceServers: [
+                { url: "stun:stun1.l.google.com:19302" },
+                {
+                    url: "turn:numb.viagenie.ca",
+                    credential: "muazkh",
+                    username: "webrtc@live.com",
+                },
+            ],
+        },
     })
     //development
     // const peer = new Peer(undefined, {
@@ -64,35 +76,32 @@ function Init() {
     }
 
     if (hasMediaDevises()) {
-        navigator.mediaDevices
-            .getUserMedia({
-                video: true,
-                audio: true,
-            })
-            .then((stream) => {
-                window.stream = stream
-                hideLoading()
-                const myVideo = document.createElement("video")
-                myVideo.muted = true
-                addVideo(myVideo, stream)
-                peer.on("call", (call) => {
-                    console.log("recevied a call")
-                    call.answer(stream)
-                    let video = document.createElement("video")
-                    call.on("stream", (userVideoStream) => {
-                        addVideo(video, userVideoStream)
-                        recalculateLayout()
-                    })
+        navigator.mediaDevices.getUserMedia({ video, audio }).then((stream) => {
+            window.localStream = stream
+            hideLoading()
+            const myVideo = document.createElement("video")
+            myVideo.muted = true
+            addVideo(myVideo, window.localStream)
+
+            //call answer
+            peer.on("call", (call) => {
+                console.log("recevied a call")
+                call.answer(window.localStream)
+                let video = document.createElement("video")
+                call.on("stream", (userVideoStream) => {
+                    addVideo(video, userVideoStream)
+                    recalculateLayout()
                 })
-                // peer.on("error", (err) => console.log(err))
-                socket.on("user-connected", (user) => {
-                    console.log("new connection in room", user)
-                    setTimeout(() => {
-                        conntectToUser(user, stream)
-                    }, 1000)
-                })
-                recalculateLayout()
             })
+            // peer.on("error", (err) => console.log(err))
+            socket.on("user-connected", (user) => {
+                console.log("new connection in room", user)
+                setTimeout(() => {
+                    conntectToUser(user, window.localStream)
+                }, 1000)
+            })
+            recalculateLayout()
+        })
     } else {
         console.log("mediaDevice not suported in your device")
     }
@@ -125,7 +134,7 @@ function Init() {
         let i_mute_class = video.muted ? "fa-volume-mute" : "fa-volume-up"
         i_mute.classList.add(i_mute_class)
         i_mute.classList.add("fa-2x")
-        if (!video.muted)
+        if (!video.muted) {
             i_mute.addEventListener("click", () => {
                 if (i_mute.classList.contains("fa-volume-up")) {
                     i_mute.classList.remove("fa-volume-up")
@@ -139,6 +148,8 @@ function Init() {
                     video.muted = false
                 }
             })
+            container.append(i_mute)
+        }
         container.classList.add("video_container")
         video.srcObject = stream
         video.addEventListener("loadedmetadata", () => {
@@ -146,7 +157,7 @@ function Init() {
             video.height = video.videoHeight
             video.play()
         })
-        container.append(video, i_mute)
+        container.append(video)
         left.append(container)
         video_count++
     }
@@ -154,15 +165,18 @@ function Init() {
     // call controls
     document.querySelector(".toggle_audio").addEventListener("click", toggleMic)
     function toggleMic() {
-        const enabled = stream.getAudioTracks()[0].enabled
         let i = this.children[0]
-        if (enabled) {
-            stream.getAudioTracks()[0].enabled = false
+        if (audio) {
+            audio = false
+            // localStream.getAudioTracks()[0].enabled = false
+            localStream.getAudioTracks().forEach((track) => track.enable(false))
+
             i.classList.remove("fa-microphone-alt")
             i.classList.add("fa-microphone-alt-slash")
         } else {
             //change icon
-            stream.getAudioTracks()[0].enabled = true
+            audio = true
+            localStream.getAudioTracks()[0].enabled = true
             i.classList.add("fa-microphone-alt")
             i.classList.remove("fa-microphone-alt-slash")
         }
@@ -172,15 +186,20 @@ function Init() {
         .querySelector(".toggle_camera")
         .addEventListener("click", toggleCamera)
     function toggleCamera() {
-        let enabled = stream.getVideoTracks()[0].enabled
         let i = this.children[0]
-        if (enabled) {
-            stream.getVideoTracks()[0].enabled = false
+        if (video) {
+            video = false
+            localStream
+                .getVideoTracks()
+                .forEach((track) => (track.enabled = false))
             //change icon
             i.classList.remove("fa-video")
             i.classList.add("fa-video-slash")
         } else {
-            stream.getVideoTracks()[0].enabled = true
+            video = true
+            localStream
+                .getVideoTracks()
+                .forEach((track) => (track.enabled = true))
             i.classList.remove("fa-video-slash")
             i.classList.add("fa-video")
             //change icon
@@ -191,6 +210,23 @@ function Init() {
         location.href = "/"
         // peer.close()
     }
-
+    let message_toggle = false
+    document.querySelector(".left").addEventListener("click", () => {
+        let chat_div = document.querySelector(".chats")
+        if (message_toggle) {
+            chat_div.style.right = "-400px"
+            message_toggle = !message_toggle
+        }
+    })
+    document.querySelector(".message").addEventListener("click", function () {
+        let chat_div = document.querySelector(".chats")
+        if (window.innerWidth > 500) {
+            chat_div.style.right = !message_toggle ? "0px" : "-400px"
+            message_toggle = !message_toggle
+        } else {
+            chat_div.style.right = !message_toggle ? "0px" : "-100%"
+            message_toggle = !message_toggle
+        }
+    })
     //inside init
 }
